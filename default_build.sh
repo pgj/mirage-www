@@ -1,16 +1,23 @@
 #!/bin/sh -x
 
+type gmake > /dev/null 2>/dev/null
+if [ "$?" -eq 0 ]; then
+	MAKE=gmake
+else
+	MAKE=make
+fi
+
 export CONF_FLAGS=--no-install
 if [ `opam list -i mirage-xen -s 2>/dev/null` ]; then
-	make xen-build
+	$MAKE xen-build
 else
   if [ `opam list -i mirage-kfreebsd -s 2>/dev/null` ]; then
-	gmake kfreebsd-build
+	$MAKE kfreebsd-build
   else
     if [ `opam list -i mirage-net-direct -s 2>/dev/null` ]; then
-	make unix-direct-build
+	$MAKE unix-direct-build
     else
-	make unix-socket-build
+	$MAKE unix-socket-build
     fi
   fi
 fi
