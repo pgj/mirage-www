@@ -24,6 +24,9 @@ fs:
 xen-%:
 	$(MAKE) FLAGS=--xen $*
 
+kfreebsd-%:
+	$(MAKE) FLAGS=--kfreebsd $*
+
 unix-socket-%:
 	$(MAKE) FLAGS="--unix --socket" $*
 
